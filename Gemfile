@@ -10,6 +10,10 @@ gem 'sqlite3'
 
 gem 'jbuilder'
 
+gem 'devise'
+
+gem 'devise-jwt'
+
 gem 'puma'
 
 gem 'bootsnap', require: false

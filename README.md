@@ -20,3 +20,5 @@
 ## Dependencies
 
 - Jbuilder
+- Devise
+- Devise JWT
