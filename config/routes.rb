@@ -7,6 +7,6 @@ Rails.application.routes.draw do
       delete :logout,   to: 'devise/sessions#destroy',     as: nil
     end
 
-    resources :users, param: :username, only: [:show]
+    resources :users, param: :username, only: [:show, :update]
   end
 end
