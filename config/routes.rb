@@ -6,5 +6,7 @@ Rails.application.routes.draw do
       post   :login,    to: 'devise/sessions#create',      as: nil
       delete :logout,   to: 'devise/sessions#destroy',     as: nil
     end
+
+    resources :users, param: :username, only: [:show]
   end
 end
