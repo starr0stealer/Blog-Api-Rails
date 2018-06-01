@@ -14,6 +14,8 @@ gem 'devise'
 
 gem 'devise-jwt'
 
+gem 'rack-cors'
+
 gem 'puma'
 
 gem 'bootsnap', require: false
