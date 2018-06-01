@@ -1,0 +1,13 @@
+# Ignore SQLite databases
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Ignore all logfiles and tempfiles.
+/log/*
+/tmp/*
+!/log/.keep
+!/tmp/.keep
+
+# Ingore Credentials
+/config/credentials.yml.enc
+/config/master.key
