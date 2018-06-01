@@ -1,13 +1,14 @@
 class UsersController < ApplicationController
-  before_action :authenticate_user!, only: [:update]
+  before_action :authenticate_user!, only: [:current, :update]
   before_action :find_user!,         only: [:show]
+
+  def current; end
 
   def show; end
 
   def update
     if current_user.update(user_params)
-      @user = current_user
-      render :show
+      render :current
     else
       render json: { errors: current_user.errors }, status: :unprocessable_entity
     end

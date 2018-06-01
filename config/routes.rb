@@ -7,6 +7,8 @@ Rails.application.routes.draw do
       delete :logout,   to: 'devise/sessions#destroy',     as: nil
     end
 
-    resources :users, param: :username, only: [:show, :update]
+    resources :users, param: :username, only: [:show, :update] do
+      get :current, on: :collection
+    end
   end
 end
