@@ -1,6 +1,14 @@
 class ArticlesController < ApplicationController
-  before_action :authenticate_user!, except: [:show]
-  before_action :find_article!,      except: [:create]
+  before_action :authenticate_user!, except: [:index, :show]
+  before_action :find_article!,      except: [:index, :create]
+
+  def index
+    @articles = Article.all.includes(:user)
+
+    @articles_count = @articles.count
+
+    @articles = @articles.order(created_at: :desc).offset(params[:offset] || 0).limit(params[:limit] || 20)
+  end
 
   def show; end
 
