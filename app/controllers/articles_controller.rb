@@ -1,6 +1,6 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:show]
-  before_action :find_article!,      only: [:show]
+  before_action :find_article!,      except: [:create]
 
   def show; end
 
@@ -12,6 +12,26 @@ class ArticlesController < ApplicationController
       render :show
     else
       render json: { errors: @article.errors }, status: :unprocessable_entity
+    end
+  end
+
+  def update
+    if @article.user_id == current_user.id
+      @article.update(article_params)
+
+      render :show
+    else
+      render json: { errors: { article: ['not owned by user'] } }, status: :forbidden
+    end
+  end
+
+  def destroy
+    if @article.user_id == current_user.id
+      @article.destroy
+
+      head :no_content
+    else
+      render json: { errors: { article: ['not owned by user'] } }, status: :forbidden
     end
   end
 
