@@ -10,7 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_01_200952) do
+ActiveRecord::Schema.define(version: 2018_06_07_170622) do
+
+  create_table "articles", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "slug", null: false
+    t.string "title", null: false
+    t.text "body", null: false
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_articles_on_slug", unique: true
+    t.index ["user_id"], name: "index_articles_on_user_id"
+  end
 
   create_table "jwt_blacklists", force: :cascade do |t|
     t.string "jti", null: false
