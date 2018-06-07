@@ -11,6 +11,8 @@ Rails.application.routes.draw do
       get :current, on: :collection
     end
 
-    resources :articles, param: :slug, except: [:edit, :new]
+    resources :articles, param: :slug, except: [:edit, :new] do
+      resources :comments, only: [:index, :create, :destroy]
+    end
   end
 end

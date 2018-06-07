@@ -3,6 +3,7 @@ class User < ApplicationRecord
          :jwt_authenticatable, jwt_revocation_strategy: JwtBlacklist
 
   has_many :articles, dependent: :destroy
+  has_many :comments, dependent: :destroy
 
   validates :username, uniqueness: { case_sensitive: false },
                        format: { with: /\A[a-zA-Z0-9]+\z/ },
