@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
     resources :users, param: :username, only: [:show, :update] do
       get :current, on: :collection
+      resource :follow, only: [:create, :destroy]
     end
 
     resources :articles, param: :slug, except: [:edit, :new] do

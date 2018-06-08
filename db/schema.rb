@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_06_08_160455) do
+ActiveRecord::Schema.define(version: 2018_06_08_172447) do
 
   create_table "articles", force: :cascade do |t|
     t.integer "user_id", null: false
@@ -41,6 +41,15 @@ ActiveRecord::Schema.define(version: 2018_06_08_160455) do
     t.datetime "updated_at", null: false
     t.index ["article_id"], name: "index_favorites_on_article_id"
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "follower_id", null: false
+    t.integer "followable_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["followable_id"], name: "index_follows_on_followable_id"
+    t.index ["follower_id"], name: "index_follows_on_follower_id"
   end
 
   create_table "jwt_blacklists", force: :cascade do |t|
