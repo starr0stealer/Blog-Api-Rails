@@ -1,6 +1,16 @@
 class ArticlesController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
-  before_action :find_article!,      except: [:index, :create]
+  before_action :find_article!,      except: [:feed, :index, :create]
+
+  def feed
+    @articles = Article.includes(:user).where(user: current_user.follows.select(:followable_id))
+
+    @articles_count = @articles.count
+
+    @articles = @articles.order(created_at: :desc).offset(params[:offset] || 0).limit(params[:limit] || 20)
+
+    render :index
+  end
 
   def index
     @articles = Article.all.includes(:user)
