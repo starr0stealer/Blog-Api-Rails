@@ -1,7 +1,8 @@
 class Article < ApplicationRecord
   belongs_to :user
 
-  has_many :comments, dependent: :destroy
+  has_many :comments,  dependent: :destroy
+  has_many :favorites, dependent: :destroy
 
   validates :title, presence:   true, allow_blank: false
   validates :body,  presence:   true, allow_blank: false
@@ -10,4 +11,6 @@ class Article < ApplicationRecord
   before_validation do
     self.slug ||= "#{title.to_s.parameterize}-#{rand(36**6).to_s(36)}"
   end
+
+  delegate :count, to: :favorites, prefix: true
 end
